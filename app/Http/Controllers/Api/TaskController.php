@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Http\Requests\Task\TaskFilterRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Task;
 
@@ -15,9 +16,11 @@ use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
 {
+   
+    
     public function __construct()
     {
-        //$this->authorizeResource(Task::class, 'task');
+        $this->authorizeResource(Task::class, 'task');
     }
 
     public function index(TaskFilterRequest $request)
@@ -77,7 +80,7 @@ public function summary(Request $request)
 
     // status breakdown (SQL aggregation)
     $statusCounts = (clone $baseQuery)
-        ->select('status', DB::raw('COUNT(*) as count'))
+        ->select('status', \DB::raw('COUNT(*) as count'))
         ->groupBy('status')
         ->pluck('count', 'status');
 

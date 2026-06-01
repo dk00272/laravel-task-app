@@ -31,10 +31,8 @@ Route::prefix('v1')->group(function () {
 
    Route::middleware('auth:sanctum')->group(function () {
 
-    Route::get('/tasks/summary', [
-        TaskController::class,
-        'summary'
-    ]);
+   Route::get('summary', [TaskController::class, 'summary']);
+
 
 });
 
