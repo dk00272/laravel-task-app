@@ -28,19 +28,19 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (! Auth::attempt($request->validated())) {
+        if (! \Auth::attempt($request->validated())) {
             return response()->json([
                 'message' => 'Invalid credentials'
             ], 401);
         }
 
-        $token = Auth::user()
+        $token = \Auth::user()
             ->createToken('task-tracker')
             ->plainTextToken;
 
         return response()->json([
             'token' => $token,
-            'user' => Auth::user(),
+            'user' => \Auth::user(),
         ]);
     }
 

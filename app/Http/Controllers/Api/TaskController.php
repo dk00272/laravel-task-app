@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateTaskRequest;
+use App\Http\Requests\Task\TaskFilterRequest;
+
+use App\Models\Task;
+
+use App\Http\Resources\TaskResource;
+
 
 class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Task::class, 'task');
+        //$this->authorizeResource(Task::class, 'task');
     }
 
     public function index(TaskFilterRequest $request)
